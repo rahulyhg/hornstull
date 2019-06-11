@@ -51,10 +51,12 @@ RewriteBase /
 	Deny From All
 </Files>
 
-# Allow any files or directories that exist to be displayed directly
+#API
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{HTTP_HOST} (www\.)?api\.*
+RewriteRule .* api.php [PT,QSA,L]
+
+#FRONTEND
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Rewrite all other URLs to index.php/URL
-# godaddy hack no input file specified
-RewriteRule .* index.php [PT,QSA,L]
+RewriteRule .* index.html [PT,QSA,L]

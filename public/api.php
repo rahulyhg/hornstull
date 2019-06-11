@@ -58,7 +58,7 @@ define('DOCROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
 
 // Make the application relative to the docroot, for symlink'd index.php
 if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
-	$application = DOCROOT.$application;
+	$application = DOCROOT.$application.DIRECTORY_SEPARATOR.'api';
 
 // Make the modules relative to the docroot, for symlink'd index.php
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
@@ -114,8 +114,5 @@ else
 	 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
 	 * If no source is specified, the URI will be automatically detected.
 	 */
-	echo Request::factory(TRUE, [], FALSE)
-		->execute()
-		->send_headers(TRUE)
-		->body();
+	echo Request::factory(TRUE, [], FALSE)->execute()->send_headers(TRUE)->body();
 }
