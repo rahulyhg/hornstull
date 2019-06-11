@@ -6,7 +6,7 @@
  *
  * @link http://kohanaframework.org/guide/about.install#application
  */
-$application = 'application';
+$application = 'application'.DIRECTORY_SEPARATOR.'api';
 
 /**
  * The directory in which your modules are located.
@@ -54,11 +54,11 @@ error_reporting(E_ALL);
  */
 
 // Set the full path to the docroot
-define('DOCROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
+define('DOCROOT', realpath(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR);
 
 // Make the application relative to the docroot, for symlink'd index.php
 if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
-	$application = DOCROOT.$application.DIRECTORY_SEPARATOR.'api';
+	$application = DOCROOT.$application;
 
 // Make the modules relative to the docroot, for symlink'd index.php
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
